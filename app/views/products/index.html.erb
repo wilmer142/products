@@ -1,2 +1,28 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+<h1>Productos</h1>
+<%=link_to 'Nuevo producto',new_product_path%>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>precio</th>
+      <th>categorias</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <% product.categories.each do |category_product| %>
+            <td><%= category_product[:name] %></td>
+        <% end%>
+        
+        <td>
+          <%= link_to "Editar producto", edit_product_path(product) %>
+          <%=  link_to "Eliminar producto",product, method: :delete, data: { confirm: "¿Seguro que deseas eliminar el producto seleccionado?" }%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
